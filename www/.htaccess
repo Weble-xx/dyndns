@@ -1,4 +1,5 @@
 <IfModule mod_rewrite.c>
   RewriteEngine on
-  RewriteRule ^updateDNS updatedns.php [L]
+  #RewriteRule ^updateDNS updatedns.php [L]
+  RewriteRule ^nic/update$ /updatedns.php [R=302,L]
 </IfModule>
