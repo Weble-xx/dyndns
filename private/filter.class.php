@@ -57,12 +57,17 @@ class filter {
      */
     public static function checkGETParameters($get) {
         //check if variables are set
-        if (!count($get) && !isset($get['hostname']) && !(isset($get['ip']) || isset($get['ip6'])) ) {
+        if (!count($get) && !isset($get['hostname']) && !(isset($get['ip']) || isset($get['ip6']) || isset($get['myip'])) {
            status::sendErrorMessage('Error: DynDNS Request invalid', true, 400);
         }
       
         //set local variables
         worker::setHostname($get['hostname']);
+        if(isset($get['myip'])) {
+            worker::setIPv4($get['myip']);
+        } else {
+            worker::setIPv4($get['ip']);
+        }
         worker::setIPv4($get['ip']);
         worker::setIPv6($get['ip6']);
         
